@@ -1,11 +1,10 @@
-import express, { type Application, type Request, type Response, type NextFunction } from 'express'
+import express, { type Application } from 'express'
+import { routes } from './routes'
 
 const app: Application = express()
 const port: number = 4000
 
-app.use('/health', (req: Request, res: Response, next: NextFunction) => {
-  res.status(200).send({ status: 200 })
-})
+routes(app)
 
 app.listen(port, () => {
   console.log(`server is listening from ${port}`)
