@@ -13,6 +13,7 @@
   "plugins": ["@typescript-eslint"],
   "ignorePatterns": ["**/node_modules/*", "**/build/*", "**/public/*", "**/tsconfig.json"],
   "rules": {
-    "@typescript-eslint/restrict-template-expressions": "off"
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/explicit-function-return-type": "off"
   }
 }
