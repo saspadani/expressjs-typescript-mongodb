@@ -24,6 +24,7 @@
   "devDependencies": {
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
+    "@types/uuid": "^9.0.3",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
     "@typescript-eslint/parser": "^5.61.0",
     "eslint": "^8.44.0",
@@ -48,6 +49,7 @@
     "mongoose": "^7.4.5",
     "nodemon": "^2.0.22",
     "pino": "^8.15.0",
-    "pino-pretty": "^10.2.0"
+    "pino-pretty": "^10.2.0",
+    "uuid": "^9.0.0"
   }
 }
