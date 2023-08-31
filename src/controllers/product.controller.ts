@@ -1,7 +1,13 @@
 import { type Request, type Response } from 'express'
 import { createProductValidation, updateProductValidation } from '../validations/product.validation'
 import { logger } from '../utils/logger'
-import { addProductToDB, getProductById, getProductFromDB, updateProductById } from '../services/product.service'
+import {
+  addProductToDB,
+  deleteProductById,
+  getProductById,
+  getProductFromDB,
+  updateProductById
+} from '../services/product.service'
 import { v4 as uuidv4 } from 'uuid'
 
 export const createProduct = async (req: Request, res: Response) => {
@@ -57,12 +63,38 @@ export const updateProduct = async (req: Request, res: Response) => {
   }
 
   try {
-    await updateProductById(id, value)
+    const result = await updateProductById(id, value)
 
-    logger.info('update product data success')
-    return res.status(200).send({ status: true, statusCode: 200, message: 'Update Product Success' })
+    if (result) {
+      logger.info('update product data success')
+      return res.status(200).send({ status: true, statusCode: 200, message: 'Update Product Success' })
+    } else {
+      logger.info('data not found')
+      return res.status(404).send({ status: true, statusCode: 404, message: 'Data not Found' })
+    }
   } catch (error) {
     logger.error('ERR: product - update = ', error)
+    return res.status(422).send({ status: false, statusCode: 422, message: error })
+  }
+}
+
+export const deleteProduct = async (req: Request, res: Response) => {
+  const {
+    params: { id }
+  } = req
+
+  try {
+    const result = await deleteProductById(id)
+
+    if (result) {
+      logger.info('delete product success')
+      return res.status(200).send({ status: true, statusCode: 200, message: 'Delete Product Success' })
+    } else {
+      logger.info('data not found')
+      return res.status(404).send({ status: true, statusCode: 404, message: 'Data not Found' })
+    }
+  } catch (error) {
+    logger.error('ERR: product - delete= ', error)
     return res.status(422).send({ status: false, statusCode: 422, message: error })
   }
 }
